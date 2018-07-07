@@ -6,8 +6,7 @@ var mongoose = require('mongoose'),
   var googleMapsClient = require('@google/maps').createClient({
     key: 'AIzaSyCjjme4cNotK8vxBHtxdv8Dw_JwpZ2O-o8'
   });
-var google = require('google')
-
+const {google} = require('googleapis');
 exports.list_all_tasks = function(req, res) {
   Task.find({}, function(err, task) {
 
@@ -21,6 +20,7 @@ exports.routes = function(req, res) {
   let origin = 'cos'
   let destination = 'cos2'
   let departureTime = new Date()
+  var directionsService = new google.maps.DirectionsService();
 
   let googleRequest = {
     origin,
@@ -32,7 +32,7 @@ exports.routes = function(req, res) {
       trafficModel: 'pessimistic'
     }
   }
-  let directionsService = new google.maps.DirectionsService();
+
   directionsService.route(request, function(result, status) {
     if (status == 'OK') {
       directionsDisplay.setDirections(result);
