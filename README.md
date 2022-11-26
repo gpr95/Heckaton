@@ -1,2 +1,2 @@
 # Heckaton
-4Fun project
+Deprecated project
